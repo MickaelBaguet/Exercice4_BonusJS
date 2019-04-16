@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Exercice 4</title>
+</head>
+<body>
+  <div class="container-fluid text-center">
+    <div class="jumbotron jumbotron-fluid ">
+      <h1>Exercice 4 - Partie Bonus</h1>
+      <h2>Veuillez entrer vos informations</h2>
+    </div>
+
+    <form>
+      <!-- Ajout de l'attribut required (booléen) qui indique les éléments obligatoires pour remplir correctement un formulaire -->
+      <p>Nom : <input type="text" name="nom" id="nom" required></p>
+      <p>Prénom : <input type="text" name="prenom" id="prenom" required></p>
+      <p>Mail : <input type="email" name="mail" id="mail" required></p>
+      <p>Téléphone : <input type="tel" name="tel" id="tel" maxlength="10" placeholder="0312345678" required></p>
+      <input type="submit" id="valid">
+    </form>
+</div>
+
+  <script>
+    var valid = document.getElementById('valid');
+    // Utilisation de regexp pour tester la validité des champs
+    var nomPrenomValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+    var mailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    valid.addEventListener('click', function(){
+      var nom = document.getElementById('nom').value;
+      var prenom = document.getElementById('prenom').value;
+      var mail = document.getElementById('mail').value;
+      var tel = document.getElementById('tel').value;
+
+      // On vérifie si la valeur du champ respecte la regexp
+      // .test(): vérifie s'il y a une correspondance entre un texte et une regexp, renvoi un booléen
+      if (nomPrenomValid.test(nom) == false){
+        // Si c'est faux on émet une alerte et on change la couleur des bordure
+          alert ("Nom invalide !");
+          document.getElementById('nom').style.borderColor = 'red';
+      }
+      if (nomPrenomValid.test(prenom) == false){
+          alert ("Prénom invalide !");
+          document.getElementById('prenom').style.borderColor = 'red';
+      }
+      if (mailValid.test(mail) == false){
+          alert ("Mail invalide !");
+          document.getElementById('mail').style.borderColor = 'red';
+      }
+      // Si le numéro n'est pas un nombre ou qu'il ne fait pas 10 caractères
+      if ((isNaN(tel) || (tel.length != 10))){
+        alert ("Téléphone invalide !");
+        document.getElementById('tel').style.borderColor = 'red';
+      }
+    });
+
+  </script>
+
+</body>
+</html>
